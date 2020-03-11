@@ -1,0 +1,67 @@
+<p>Current transactions</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Recipient</th>
+    </tr>
+  </thead>
+  <tbody>
+	{{#each blockchain_data.pendingTransactions}}
+
+    <tr>
+      <th scope="row">3</th>
+      <td>{{this.amount}}</td>
+      <td>{{this.sender}}</td>
+      <td>{{this.recipient}}</td>
+    </tr>
+	{{/each}}
+	<tr>
+	<form action="api/blockchain_calc" method="post">
+		
+		<th class="row" > TR</th>
+		<td><input type="text" name="amount"></td>
+		<td><input type="text" name="sender"></td>
+		<td><input type="text" name="recipient"></td>
+		 <td><input type="submit" value="Send" class="btn btn-primary btn-block"></td>
+
+	</form>
+	</tr>
+	
+		
+			
+		
+
+	
+  </tbody>
+</table>
+
+<hr>
+<hr>
+
+<div class="scrollmenu">
+	{{#each blockchain_data.chain}}
+		<ul class="list">
+
+				<li class="list-group-item">Block {{this.index}}</li>
+				<li class="list-group-item">{{this.timestamp}}</li>
+				<li class="list-group-item">{{this.nonce}}</li>
+				<li class="list-group-item">{{this.hash}}</li>
+				<li class="list-group-item">{{this.previousBlockHash}}</li>
+		</ul>
+		<hr>
+	{{/each}}
+
+
+</div>
+
+
+
+
+
+
+
+
