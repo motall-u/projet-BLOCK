@@ -1,3 +1,8 @@
+const mongoose= require('mongoose');
+
+const blockchain_db= require('./blockchain_db');
+const data= new blockchain_db();
+
 const sha256=require('js-sha256');
 
  //Constructor function
@@ -7,6 +12,8 @@ const sha256=require('js-sha256');
 
  	//Creating the genesis block: The First
  	this.createNewBlock(100,'0','0'); //Default values
+
+
  } 
 
 //Creating blockchain method for new block
@@ -22,9 +29,23 @@ Blockchain.prototype.createNewBlock= function(nonce,previousBlockHash, hash){
 
 	 };
 
+
+
 	 this.pendingTransactions=[];
 	 this.chain.push(newBlock);
+	
 
+
+	 // data.chain.index = newBlock.index;
+	 // data.chain.timestamp = newBlock.timestamp;
+	 // data.chain.transactions = newBlock.transactions;
+	 // data.chain.nonce = newBlock.nonce;
+	 // data.chain.hash = newBlock.hash;
+	 // data.chain.previousBlockHash = newBlock.previousBlockHash;
+
+	 data.pendingTransactions=[];
+	 data.chain.push(newBlock)
+	 //data.save();
 	 return newBlock;
 }
 
@@ -42,7 +63,11 @@ Blockchain.prototype.createNewTransaction= function(amount,sender,recipient){
 		recipient:recipient
 	};
 	//We record this transaction into pendingTransactions(all transactions)
+
 	this.pendingTransactions.push(newTransaction);
+	data.pendingTransactions.push(newTransaction);
+	
+	data.save()
 	return this.getLastBlock()['index']+1;
 }
 

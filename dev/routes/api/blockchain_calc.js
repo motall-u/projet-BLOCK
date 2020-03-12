@@ -7,15 +7,10 @@ const Blockchain=require('../../Blockchain');
 const bitcoin = new Blockchain();//premier block deja initialiser
 
 
-
-
 //Get all data
 router.get('/',(req,res)=>{
 	res.json(blockchain_data);
 });
-
-
-
 
 //Create transaction
 router.post('/',(req,res)=>{
@@ -23,14 +18,16 @@ router.post('/',(req,res)=>{
 		amount: req.body.amount,
 		sender:req.body.sender,
 		recipient:req.body.recipient
-	}	
-
+	}
 		
 	if (newTransactions.amount !=='' && newTransactions.sender !== '' && newTransactions.recipient !== '') {
-		
-		bitcoin.createNewTransaction(req.body.amount,req.body.sender,req.body.recipient);
-		blockchain_data.pendingTransactions.push(newTransactions);
 
+				//test function
+		blockchain_data.pendingTransactions.push(newTransactions);
+		bitcoin.createNewTransaction(newTransactions.amount,newTransactions.sender,newTransactions.recipient);
+		console.log(bitcoin);
+
+		///Save directly into database
 
 	}else{
 		return res.status(400).json({msg:'Transaction impossible'});
@@ -40,15 +37,27 @@ router.post('/',(req,res)=>{
 
 });
 
-//Create new block
-router.post('/a',(req,res)=>{
 
+//Create new block
+router.get('/newblock',(req,res)=>{
+	//ProofOfWork return nonce
+	//previousBlockHash,currentBlockData
+
+
+	//HAshblock calcul
+	//previousBlockHash,currentBlockData, nonce
+
+
+	//createNewBlock function
+	//nonce,previousBlockHash, hash
+	//bitcoin.createNewBlock()
 });
 
 
 //blockchain_data.push(Blockchain);
 
-console.log(bitcoin);
+//console.log(bitcoin);
+
 
 
 module.exports=bitcoin;

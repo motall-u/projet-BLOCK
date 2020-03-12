@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-	{{#each blockchain_data.pendingTransactions}}
+	{{#each results1}}
 
     <tr>
       <th scope="row">3</th>
@@ -43,20 +43,22 @@
 <hr>
 
 <div class="scrollmenu">
-	{{#each blockchain_data.chain}}
+	{{#each results2}}
 		<ul class="list">
 
-				<li class="list-group-item">Block {{this.index}}</li>
-				<li class="list-group-item">{{this.timestamp}}</li>
-				<li class="list-group-item">{{this.nonce}}</li>
-				<li class="list-group-item">{{this.hash}}</li>
-				<li class="list-group-item">{{this.previousBlockHash}}</li>
+				<li class="list-group-item">Block: {{this.index}}</li>
+				<li class="list-group-item">Time: {{this.timestamp}}</li>
+				<li class="list-group-item"> Nonce: {{this.nonce}}</li>
+				<li class="list-group-item">hash: {{this.hash}}</li>
+				<li class="list-group-item">Previous hash: {{this.previousBlockHash}}</li>
 		</ul>
 		<hr>
 	{{/each}}
 
 
 </div>
+
+<a href="api/blockchain_calc/newblock"><button class="btn btn-primary btn-block">Miner</button> </a>
 
 
 
