@@ -21,13 +21,9 @@ router.post('/',(req,res)=>{
 	}
 		
 	if (newTransactions.amount !=='' && newTransactions.sender !== '' && newTransactions.recipient !== '') {
-
-				//test function
 		blockchain_data.pendingTransactions.push(newTransactions);
 		bitcoin.createNewTransaction(newTransactions.amount,newTransactions.sender,newTransactions.recipient);
 		console.log(bitcoin);
-
-		///Save directly into database
 
 	}else{
 		return res.status(400).json({msg:'Transaction impossible'});
@@ -43,6 +39,8 @@ router.get('/newblock',(req,res)=>{
 	//ProofOfWork return nonce
 	//previousBlockHash,currentBlockData
 
+	var nonce_value = bitcoin.proofOfWork()
+
 
 	//HAshblock calcul
 	//previousBlockHash,currentBlockData, nonce
@@ -54,9 +52,6 @@ router.get('/newblock',(req,res)=>{
 });
 
 
-//blockchain_data.push(Blockchain);
-
-//console.log(bitcoin);
 
 
 
